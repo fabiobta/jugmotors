@@ -43,6 +43,7 @@ class PedidoController {
 	def buscarOpcionais(){
 //		render(template: 'opcionais', model: [opcionaisList: Modelo.get(params.modelo)?.opcionais])
 		render(template: 'opcionais', model: [modelooo: Modelo.get(params.modelo)])
+		
 	}
 	
     def create() {
