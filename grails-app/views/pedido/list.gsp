@@ -20,6 +20,10 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			<hr />
+			<g:if test="${flash.avcs}">
+			<div class="message" role="status">${flash.avcs}</div>
+			</g:if>
 			<table>
 				<thead>
 					<tr>

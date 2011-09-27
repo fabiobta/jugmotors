@@ -17,12 +17,7 @@
 	</label>
 	
 	<span id="opcionais">
-		<g:if test="${pedidoInstance.modelo}">
-			<g:render template="opcionais" model="['opcionaisList': pedidoInstance.modelo.opcionais]"/>
-		</g:if>
-		<g:else>
-			Selecione um modelo
-		</g:else>
+		<g:render template="opcionais" model="[modelooo: pedidoInstance.modelo]" />
 	</span>
 </div>
 

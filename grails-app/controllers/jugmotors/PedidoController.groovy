@@ -1,6 +1,7 @@
 package jugmotors
 
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.web.servlet.ModelAndView;
 
 class PedidoController {
 
@@ -20,12 +21,28 @@ class PedidoController {
 		
 		if(!carro) flash.message = "Modelo $modelo $motor não encontrado!"
 		
-		render(view: 'create', model: [pedidoInstance: new Pedido(modelo: carro)])
+//		def novoPedido = new Pedido([modelo: carro])
+//
+//		def modelll = [pedidoInstance: novoPedido]
+//		
+//		def modelAndView = [view: 'create', model: modelll]
+//		
+//		render(modelAndView)
+		
+		def novoPedido = new Pedido()
+		novoPedido.setModelo(carro)
+		
+		Map<String, Object> modellll = new HashMap<String, Object>();
+		modellll.put('pedidoInstance', novoPedido)
+		ModelAndView mav = new ModelAndView('create', modellll)
+		return mav
+		
 		
 	}
 	
 	def buscarOpcionais(){
-		render(template: 'opcionais', model: [opcionaisList: Modelo.get(params.modelo)?.opcionais])
+//		render(template: 'opcionais', model: [opcionaisList: Modelo.get(params.modelo)?.opcionais])
+		render(template: 'opcionais', model: [modelooo: Modelo.get(params.modelo)])
 	}
 	
     def create() {
@@ -57,11 +74,15 @@ class PedidoController {
     def edit() {
         def pedidoInstance = Pedido.get(params.id)
         if (!pedidoInstance) {
+			
+			flash.avcs = 'agsvdasghdv'
+			
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'pedido.label', default: 'Pedido'), params.id])
             redirect(action: "list")
             return
         }
 
+//        [pedidoInstance: pedidoInstance, modelooo: pedidoInstance.modelo]
         [pedidoInstance: pedidoInstance]
     }
 
@@ -113,4 +134,8 @@ class PedidoController {
             redirect(action: "show", id: params.id)
         }
     }
+	
+	def abc() {
+		render(view: "teste");
+	}
 }
